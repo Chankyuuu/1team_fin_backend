@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -38,8 +39,12 @@ public class Todo {
 	@JoinColumn(name = "user_id")
 	private User user;
 
+    @OneToMany
+    @JoinColumn(name = "category_id")
+    private Category category;
+
     @Builder
-    public Todo(Long id, String title, String description, LocalDateTime deadline, LocalDateTime createdAt, LocalDateTime updatedAt, Boolean deleteYn, Boolean doneYn, User user) {
+    public Todo(Long id, String title, String description, LocalDateTime deadline, LocalDateTime createdAt, LocalDateTime updatedAt, Boolean deleteYn, Boolean doneYn, User user, Category category) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -49,5 +54,6 @@ public class Todo {
         this.deleteYn = deleteYn;
         this.doneYn = doneYn;
         this.user = user;
+        this.category = category;
     }
 }
